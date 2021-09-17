@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+
+{%block title%} welcome title {%endblock%}
+
+{%block content%}
+<main class="main-wrap">
+    <section class="m-hero no-picture aos-init aos-animate" data-aos="fade">
+        <div class="m-hero__content aos-init aos-animate" data-aos="fade-down">
+            <h1 class="m-hero-title bigger">ফুটবল</h1>
+            <div class="m-hero__meta">
+                <ul class="m-hero-stats">
+                    <li>
+                        14 posts with this tag </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="l-content">
+        <div class="l-wrapper aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+            <div class="l-grid centered">
+                {%for post in posts%}
+                <article class="m-article-card  post tag-david-ley tag-dr-david-ley tag-masturbation tag-sexuality">
+                    <div class="m-article-card__picture">
+                        <a href="/blog/{{post.post_url}}"
+                            class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+
+                        <img src="/media/{{post.post_image}}" alt="{{post.post_title}}">
+                        <a href="http://blog.decktheme.ml/author/admin/" class="m-article-card__author js-tooltip"
+                            aria-label="admin" data-tippy-content="Posted by admin ">
+                            <div style="background-image: url(http://1.gravatar.com/avatar/?s=96&amp;d=mm&amp;r=g);">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="m-article-card__info">
+                        <a href="http://blog.decktheme.ml/category/sports/footbll/"
+                            class="m-article-card__tag">ফুটবল</a>
+                        <a href="/blog/{{post.post_url}}"
+                            class="m-article-card__info-link" aria-label="লজ্জা এড়ালো মিলান">
+                            <div>
+                                <h2 class="m-article-card__title js-article-card-title " title="লজ্জা এড়ালো মিলান">
+                                    {{post.post_title}}
+                                </h2>
+                            </div>
+                            <div class="m-article-card__timestamp">
+                                <span>11 months ago</span>
+                                <span>•</span>
+                                <span>1 min read</span>
+                            </div>
+                        </a>
+                    </div>
+                </article>
+                {%endfor%}
+            </div>
+            {%include 'pagination.html' with page=posts %}
+        </div>
+    </div>
+</main>
+{%endblock%}

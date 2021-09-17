@@ -1,0 +1,110 @@
+{%extends 'base.html'%}
+
+{%block title%} {{siteDetail.site_name}} {%endblock%}
+
+{%block content%}
+
+
+<main class="main-wrap">
+    <div class="l-content">
+        <div class="l-wrapper aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+            <div class="l-grid centered">
+                <div class="m-featured-slider glide js-featured-slider glide--ltr glide--slider glide--swipeable">
+                    <div class="glide__track" data-glide-el="track">
+                        <div class="m-featured-slider__list glide__slides">
+                            {%for p in latest_post%}
+                            <div class="m-featured-slider__list__item glide__slide js-featured-slide"
+                                style="width: 787px; margin-left: 0px;">
+                                <article class="m-featured-article ">
+                                    <div class="m-featured-article__picture">
+                                        <div style="background-image: url(/media/{{p.post_image}});"
+                                            id="featured-bg-607fe83214ce8c0001027539"></div>
+                                    </div>
+                                    <div class="m-featured-article__meta">
+                                        <a href="{{p.post_user}}/{{p.post_user.id}}"
+                                            class="m-featured-article__author js-tooltip" aria-label="{{p.post_user}}"
+                                            data-tippy-content="Posted by {{p.post_user}} ">
+                                            <div style="background-image: url('{{ p.post_user.profile.user_image.url }}');">
+                                            </div>
+                                        </a>
+                                        <a href="/category/{{p.post_in_cat.cat_url}}"
+                                            class="m-featured-article__tag">{{p.post_in_cat}}</a>
+                                    </div>
+                                    <div class="m-featured-article__ribbon">
+                                        <span class="icon-star"></span>
+                                        <span>Featured</span>
+                                    </div>
+                                    <a href="/blog/{{p.post_url}}"
+                                        class="m-featured-article__content">
+                                        <h2 class="m-featured-article__title js-featured-article-title"
+                                            title="{{p.post_title}}">
+                                            {{p.post_title}} </h2>
+                                        <div class="m-featured-article__timestamp">
+                                            <span>{{ p.whenpublished }}</span>
+                                            <span>•</span>
+                                            <span>{{p.get_readtime}} read</span>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            {%endfor%}
+                            
+                        </div>
+                    </div>
+                    <div data-glide-el="controls" class="glide__arrows js-featured-slider-controls">
+                        <button data-glide-dir="<"
+                            class="m-icon-button in-featured-articles glide-prev js-featured-slider-previous"
+                            aria-label="Previous" disabled="">
+                            <span class="icon-arrow-left" aria-hidden="true"></span>
+                        </button>
+                        <button data-glide-dir=">"
+                            class="m-icon-button in-featured-articles glide-next js-featured-slider-next"
+                            aria-label="Next">
+                            <span class="icon-arrow-right" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+
+                {%for p in posts%}
+                <article class="m-article-card  post tag-psychology featured">
+                    <div class="m-article-card__picture">
+                        <a href="/blog/{{p.post_url}}"
+                            class="m-article-card__picture-link" aria-hidden="true" tabindex="-1"></a>
+                        <img width="500" height="280" src="/media/{{p.post_image}}"
+                            class="m-article-card__picture-background wp-post-image" alt="" loading="lazy"
+                            srcset="/media/{{p.post_image}} 500w, /media/{{p.post_image}} 300w"
+                            sizes="(max-width: 500px) 100vw, 500px"> <a href="{{p.post_user}}/{{p.post_user.id}}"
+                            class="m-article-card__author js-tooltip" aria-label="{{p.post_user}}"
+                            data-tippy-content="Posted by {{p.post_user}} ">
+                            <div style="background-image: url('{{ p.post_user.profile.user_image.url }}');">
+                            </div>
+                        </a>
+                        <a href="/blog/{{p.post_url}}"
+                            class="m-article-card__featured js-tooltip" data-tippy-content="Featured"
+                            aria-label="Featured">
+                            <span class="icon-star" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="m-article-card__info">
+                        <a href="/category/{{p.post_in_cat.cat_url}}" class="m-article-card__tag">{{p.post_in_cat}}</a>
+                        <a href="/blog/{{p.post_url}}" class="m-article-card__info-link" aria-label="{{p.post_title}}">
+                            <div>
+                                <h2 class="m-article-card__title js-article-card-title " title="{{p.post_title}}">
+                                    {{p.post_title}} </h2>
+                            </div>
+                            <div class="m-article-card__timestamp">
+                                <span>{{ p.whenpublished }}</span>
+                                <span>•</span>
+                                <span>{{p.get_readtime}} read</span>
+                            </div>
+                        </a>
+                    </div>
+                </article>
+                {%endfor%}
+            </div>
+            {%include 'pagination.html' with page=posts %}
+        </div>
+    </div>
+</main>
+
+{%endblock%}

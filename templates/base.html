@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} {%endblock%}</title>
+
+    {%load static%}
+
+    <link rel="shortcut icon" href="/media/{{siteDetail.favicon}}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/app.css'%}">
+    <link rel="stylesheet" href="{% static 'css/listing.css'%}">
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <link rel="stylesheet" href="{% static 'css/post.css'%}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css'%}">
+</head>
+
+<body>
+    {%include 'header.html' %}
+
+    {%block content%}
+
+    {%endblock%}
+    {%include 'footer.html' %}
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'js/app.js'%}"></script>
+    <script src="{% static 'js/content-api.min.js'%}"></script>
+    <script src="{% static 'js/home.js'%}"></script>
+    <script src="{% static 'js/manifest.js'%}"></script>
+    <script src="{% static 'js/polyfill.min.js'%}"></script>
+    <script src="{% static 'js/portal.min.js'%}"></script>
+    <script src="{% static 'js/post.js'%}"></script>
+    <script src="{% static 'js/script.js'%}"></script>
+    <script src="{% static 'js/vendor.js'%}"></script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<div class="l-wrapper">
+    <div class="m-pagination">
+        <div class="pagination_inner" style="display: flex; align-items: center;">
+            {% if page.has_previous%}
+            <a class="m-icon-button filled in-pagination-left" href="?page={{page.previous_page_number}}">
+                <span class="icon-arrow-left"></span>
+            </a>
+            {% endif %}
+            <div style="margin:0 10px;" class="page_range">Page {{page.number}} Of {{page.paginator.num_pages}}</div>
+            {% if page.has_next%}
+            <a class="m-icon-button filled in-pagination-right" href="?page={{page.next_page_number}}">
+                <span class="icon-arrow-right"></span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

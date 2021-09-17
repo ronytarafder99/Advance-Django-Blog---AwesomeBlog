@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%block title%} {{privacy_Page.privacy_page_title}} {%endblock%}
+
+{%block content%}
+
+<main class="main-wrap">
+    <section class="m-hero no-picture aos-init aos-animate" data-aos="fade">
+      <div class="m-hero__content aos-init aos-animate" data-aos="fade-down">
+        <h1 class="m-hero-title bigger">{{privacy_Page.privacy_page_title}}</h1>
+      </div>
+    </section>
+    <article>
+      <div class="l-content">
+        <div class="l-wrapper in-post aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+          <div class="l-post-content">
+            <div class="pos-relative js-post-content">
+                {{privacy_Page.privacy_page_content|safe}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+
+{% endblock %}

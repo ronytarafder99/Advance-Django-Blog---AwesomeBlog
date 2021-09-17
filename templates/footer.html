@@ -1,0 +1,35 @@
+<footer class="m-footer">
+  <div class="m-footer__content">
+    <nav class="m-footer__nav-secondary" role="navigation" aria-label="Secondary menu in footer">
+
+      <ul class="m-secondary-menu">
+        <li>
+          <a href="{% url 'pages:about' %}">About Us</a>
+        </li>
+        <li>
+          <a href="{% url 'pages:contact' %}">Contact Us</a>
+        </li>
+        <li>
+          <a href="{% url 'pages:privacy' %}">privacy Policy</a>
+        </li>
+      </ul>
+
+    </nav>
+    <nav class="m-footer-social">
+      <a href="{{socialLink.twitter_link}}" target="_blank" rel="noopener" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="{{socialLink.fcebook_link}}" aria-label="RSS">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </nav>
+    <p class="m-footer-copyright">
+      <span>{{siteDetail.site_name}} © <script>
+          document.write(new Date().getFullYear())
+        </script></span>
+      <span>&nbsp; • &nbsp;</span>
+      <span>{{siteDetail.site_description}}</span>
+    </p>
+
+  </div>
+</footer>
