@@ -158,8 +158,8 @@ class SocialSetting(models.Model):
 class SiteDetail(models.Model):
     site_name = models.CharField(max_length=255)
     site_description = models.CharField(max_length=255)
-    site_logo = models.ImageField(upload_to='logo/')
-    favicon = models.ImageField(upload_to='logo/')
+    site_logo = models.ImageField(upload_to='logo/', default='logo/image.png')
+    favicon = models.ImageField(upload_to='logo/', default='logo/favicon.ico')
 
     def __unicode__(self):
         return self.site_name
