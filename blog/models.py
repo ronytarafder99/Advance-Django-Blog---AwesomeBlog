@@ -170,11 +170,11 @@ class SiteDetail(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    location = models.CharField(max_length=30, )
-    user_bio = models.TextField(blank=True)
-    author_url = models.URLField(blank=True, null=True)
-    author_fcebook_link = models.URLField(blank=True, null=True)
-    user_image = models.ImageField(upload_to='user/')
+    location = models.CharField(max_length=30, default="Dhaka, bangladesh")
+    user_bio = models.TextField(blank=True, default="Creative")
+    author_url = models.URLField(blank=True, null=True, default="https://webdeck99.blogspot.com/")
+    author_fcebook_link = models.URLField(blank=True, null=True ,default="https://www.facebook.com/ronytarafder99")
+    user_image = models.ImageField(upload_to='user/', default='user/avatardefault.png')
 
     def __str__(self):
         return self.user.username
