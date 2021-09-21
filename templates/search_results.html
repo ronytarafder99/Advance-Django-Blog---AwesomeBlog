@@ -1,0 +1,66 @@
+{%extends 'base.html'%}
+
+{%block title%} Serch Results {%endblock%}
+
+{%block content%}
+
+
+<main class="main-wrap">
+    {% if query %}
+    <section class="m-hero no-picture aos-init aos-animate" data-aos="fade">
+        <div class="m-hero__content aos-init aos-animate" data-aos="fade-down">
+            <h1 class="m-hero-title bigger">{{query}}</h1>
+        </div>
+        {% if object_list %}
+        <div class="m-hero__meta">
+            <ul class="m-hero-stats">
+                <li>{{object_list_count}} Posts on This Search query</li>
+            </ul>
+        </div>
+        {% else %}
+        <div class="m-hero__meta">
+            <ul class="m-hero-stats">
+                <li>No Posts on This Search query</li>
+            </ul>
+        </div>
+        {% endif %}
+    </section>
+    {% if object_list %}
+    <article>
+        <div class="l-content">
+            <div class="l-wrapper in-post aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                <div class="l-post-content">
+                    <div class="pos-relative js-post-content">
+                        {%for post in object_list%}
+                        <figure class="kg-card kg-bookmark-card"><a class="kg-bookmark-container"
+                                href="/blog/{{post.post_url}}">
+                                <div class="kg-bookmark-content">
+                                    <div class="kg-bookmark-title">{{post.post_title}}</div>
+                                    <div class="kg-bookmark-description">{{post.post_content |truncatewords:25| safe}}
+                                    </div>
+                                    <div class="kg-bookmark-metadata"><img class="kg-bookmark-icon"
+                                            src="/media/{{siteDetail.favicon}}" alt="Favicon"><span
+                                            class="kg-bookmark-author">{{siteDetail.site_name}}</span>
+                                        <span class="kg-bookmark-publisher">{{post.post_user}}</span></div>
+                                </div>
+                                <div class="kg-bookmark-thumbnail">
+                                    <img src="/media/{{post.post_image}}" alt="{{post.post_title}}" />
+                                </div>
+                            </a>
+                        </figure>
+                        {%endfor%}
+                    </div>
+
+                    {%include 'pagination.html' with page=object_list %}
+
+                </div>
+            </div>
+        </div>
+    </article>
+    {% else %}
+    {% endif %}
+    {% endif %}
+</main>
+
+
+{%endblock%}

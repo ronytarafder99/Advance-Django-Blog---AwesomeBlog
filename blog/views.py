@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.models import Tag
 from django.views.generic import TemplateView
+from django.db.models import Q
 
 # Create your views here.
 
@@ -157,3 +158,35 @@ def authorView(request, username, author_id):
         'num_post': posts_list.count(),
     }
     return render(request, "author.html", author_data)
+
+
+def SearchResultsView(request):
+    socialLink = SocialSetting.objects.filter().first()
+    menuItem = HeaderMenu.objects.all()
+    headerDropdownMenu = HeaderDropdownMenu.objects.all()
+    siteDetail = SiteDetail.objects.filter().first()
+    query = request.GET.get('q')
+
+    posts_list = Post.objects.filter(
+        Q(post_title__icontains=query) | Q(post_content__icontains=query)
+    )
+    paginator = Paginator(posts_list, 100)
+    page = request.GET.get('page')
+
+    try:
+        object_list = paginator.page(page)
+    except PageNotAnInteger:
+        object_list = paginator.page(1)
+    except EmptyPage:
+        object_list = paginator.page(paginator.num_pages)
+
+    search_data = {
+        'object_list_count': posts_list.count(),
+        'object_list': object_list,
+        'query': query,
+        'socialLink': socialLink,
+        'menuItem': menuItem,
+        'headerDropdownMenu': headerDropdownMenu,
+        'siteDetail': siteDetail,
+    }
+    return render(request, 'search_results.html', search_data)

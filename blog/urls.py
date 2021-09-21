@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import home, post, category, FilterByTag, authorView
+from .views import home, post, category, FilterByTag, authorView, SearchResultsView
 
 app_name = "blog"
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('category/<slug:url>',category),
     path('tag/<slug:tag>/', FilterByTag, name='tag'),
     path('<str:username>/<str:author_id>', authorView),
+    path('search/', SearchResultsView, name='search_results'),
 ]

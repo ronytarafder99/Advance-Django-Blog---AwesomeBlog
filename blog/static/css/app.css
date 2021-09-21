@@ -983,7 +983,6 @@ fieldset {
         display: flex;
         width: 32px;
         height: 32px;
-        margin-left: 20px;
     }
 }
 
@@ -1961,8 +1960,8 @@ fieldset {
     position: fixed;
     right: 20px;
     bottom: 45px;
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     overflow: hidden;
     z-index: 2
@@ -4040,3 +4039,43 @@ _:-ms-fullscreen {
 .glide--rtl {
     direction: rtl
 }
+
+.search-box form{
+    display: flex;
+    background-color: var(--toggle-darkmode-background-color);
+    border-radius: 50px;
+    margin-left: 20px;
+  }
+  
+  .search-btn {
+    float: right;
+    border-radius: 50%;
+    background-color: var(--toggle-darkmode-background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 2s;
+  }
+  
+  .fa-search {
+    font-size: 24px;
+  }
+  
+  .search-input {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: var(--titles-color);
+    font-size: .8rem;
+    transition: 0.4s;
+    width: 0;
+  }
+  
+  .search-box form:hover > .search-input {
+    width: 250px;
+    padding: 0 7px;
+  }
+  
+  
