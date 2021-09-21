@@ -51,11 +51,13 @@ def home(request):
 
 
 def post(request, url):
+    header_post = Post.objects.order_by('-created_date')[:4]
+    tags = Tag.objects.all()
     siteDetail = SiteDetail.objects.filter().first()
+    socialLink = SocialSetting.objects.filter().first()
     post = Post.objects.get(post_url=url)
     cat = post.post_in_cat
     cats = Category.objects.all()
-    socialLink = SocialSetting.objects.filter().first()
     menuItem = HeaderMenu.objects.all()
     headerDropdownMenu = HeaderDropdownMenu.objects.all()
     related_posts = Post.objects.filter(post_in_cat=cat)[:3]
@@ -68,6 +70,8 @@ def post(request, url):
         'siteDetail': siteDetail,
         'related_posts': related_posts,
         'socialLink': socialLink,
+        'header_post': header_post,
+        'tags': tags,
     }
 
     return render(request, 'posts.html', post_data)
@@ -76,7 +80,8 @@ def post(request, url):
 def category(request, url):
     cats = Category.objects.all()
     cat = Category.objects.get(cat_url=url)
-
+    tags = Tag.objects.all()
+    header_post = Post.objects.order_by('-created_date')[:4]
     posts_list = Post.objects.filter(post_in_cat=cat)
     paginator = Paginator(posts_list, 2)
     page = request.GET.get('page')
@@ -89,6 +94,7 @@ def category(request, url):
         posts = paginator.page(paginator.num_pages)
 
     menuItem = HeaderMenu.objects.all()
+    headerDropdownMenu = HeaderDropdownMenu.objects.all()
     siteDetail = SiteDetail.objects.filter().first()
     socialLink = SocialSetting.objects.filter().first()
     category_data = {
@@ -98,15 +104,23 @@ def category(request, url):
         'menuItem': menuItem,
         'siteDetail': siteDetail,
         'socialLink': socialLink,
+        'headerDropdownMenu': headerDropdownMenu,
         'num_post': posts_list.count(),
+        'tags': tags,
+        'header_post': header_post,
     }
 
     return render(request, "category.html", category_data)
 
 
 def FilterByTag(request, tag):
+    header_post = Post.objects.order_by('-created_date')[:4]
+    tags = Tag.objects.all()
+    tag = Tag.objects.get(name=tag)
     cats = Category.objects.all()
-
+    siteDetail = SiteDetail.objects.filter().first()
+    socialLink = SocialSetting.objects.filter().first()
+    headerDropdownMenu = HeaderDropdownMenu.objects.all()
     posts_list = Post.objects.filter(
         tags__name__in=[tag]).order_by('-created_date')
     paginator = Paginator(posts_list, 2)
@@ -121,15 +135,23 @@ def FilterByTag(request, tag):
 
     menuItem = HeaderMenu.objects.all()
     category_data = {
+        'tag_num_posts': posts_list.count(),
         'posts': posts,
         'cats': cats,
         'menuItem': menuItem,
-        'num_post': posts_list.count(),
+        'header_post': header_post,
+        'tags': tags,
+        'tag': tag,
+        'siteDetail': siteDetail,
+        'headerDropdownMenu': headerDropdownMenu,
+        'socialLink': socialLink,
     }
     return render(request, "tag.html", category_data)
 
 
 def authorView(request, username, author_id):
+    header_post = Post.objects.order_by('-created_date')[:4]
+    tags = Tag.objects.all()
     socialLink = SocialSetting.objects.filter().first()
     menuItem = HeaderMenu.objects.all()
     headerDropdownMenu = HeaderDropdownMenu.objects.all()
@@ -153,7 +175,9 @@ def authorView(request, username, author_id):
         'siteDetail': siteDetail,
         'socialLink': socialLink,
         'author_post': author_post,
+        'header_post': header_post,
         'profile': profile,
+        'tags': tags,
         'currentUser': currentUser,
         'num_post': posts_list.count(),
     }
@@ -161,6 +185,8 @@ def authorView(request, username, author_id):
 
 
 def SearchResultsView(request):
+    header_post = Post.objects.order_by('-created_date')[:4]
+    tags = Tag.objects.all()
     socialLink = SocialSetting.objects.filter().first()
     menuItem = HeaderMenu.objects.all()
     headerDropdownMenu = HeaderDropdownMenu.objects.all()
@@ -188,5 +214,7 @@ def SearchResultsView(request):
         'menuItem': menuItem,
         'headerDropdownMenu': headerDropdownMenu,
         'siteDetail': siteDetail,
+        'header_post': header_post,
+        'tags': tags,
     }
     return render(request, 'search_results.html', search_data)
